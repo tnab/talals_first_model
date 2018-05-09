@@ -21,11 +21,17 @@ explore: events {
   }
 }
 
-explore: inventory_items {
+explore: product_exploration  {
+  label: "Products"
   join: products {
-    type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.id} ;;
+      type: left_outer
+    sql_on: ${product_exploration.product_id} = ${products.id} ;;
     relationship: many_to_one
+  }
+
+  join: order_items {
+    sql_on: ${product_exploration.id} = ${order_items.inventory_item_id} ;;
+    relationship: one_to_many
   }
 }
 
@@ -63,18 +69,11 @@ explore: orders {
   }
 }
 
-explore: products {}
-
-explore: schema_migrations {}
-
-explore: user_data {
+explore: user_exploration {
+  sql_always_where: ${users.age} > 0 AND ${users.age} < 100   ;;
+  label: "Users"
   join: users {
-    type: left_outer
-    sql_on: ${user_data.user_id} = ${users.id} ;;
+    sql_on: ${user_exploration.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
 }
-
-explore: users {}
-
-explore: users_nn {}

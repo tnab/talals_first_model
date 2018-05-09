@@ -17,6 +17,15 @@ view: user_data {
     sql: ${TABLE}.total_num_orders ;;
   }
 
+#   Customer Segmentation by Age
+  dimension: age_group {
+    type: tier
+    tiers: [19, 31, 51]
+    label: "Customer Age Group"
+    style:  integer
+    sql: ${users.age} ;;
+  }
+
   dimension: user_id {
     type: number
     # hidden: yes

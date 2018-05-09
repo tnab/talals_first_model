@@ -42,7 +42,13 @@ view: products {
     sql: ${TABLE}.sku ;;
   }
 
-  measure: count {
+  measure: product_revenue {
+    type: sum
+    sql: ${order_items.sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure: brand_count{
     type: count
     drill_fields: [id, item_name, inventory_items.count]
   }

@@ -1,4 +1,4 @@
-view: inventory_items {
+view: product_exploration {
   sql_table_name: demo_db.inventory_items ;;
 
   dimension: id {
@@ -33,6 +33,12 @@ view: inventory_items {
     sql: ${TABLE}.product_id ;;
   }
 
+  dimension: profit {
+    type: number
+    sql: ${order_items.sale_price} - ${TABLE}.cost ;;
+    value_format_name: usd
+  }
+
   dimension_group: sold {
     type: time
     timeframes: [
@@ -45,6 +51,35 @@ view: inventory_items {
       year
     ]
     sql: ${TABLE}.sold_at ;;
+  }
+
+
+  measure: total_revenue {
+    type: sum
+    sql: ${order_items.sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure: total_cost {
+    type: sum
+    sql: ${TABLE}.cost ;;
+    value_format_name: usd
+  }
+
+  measure: test_proft {
+    type: sum
+    sql: (${order_items.sale_price} - ${TABLE}.cost) ;;
+    value_format_name: usd
+  }
+
+  measure: total_profit {
+    type: sum
+    sql: ${TABLE}.profit ;;
+  }
+
+  measure: avg_category_profit {
+    label: "Average Profit"
+
   }
 
   measure: count {
