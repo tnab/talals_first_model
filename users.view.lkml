@@ -78,10 +78,11 @@ view: users {
       id,
       first_name,
       last_name,
+      age,
       events.count,
       orders.count,
       user_data.count,
-      zip
+      state
     ]
   }
 }

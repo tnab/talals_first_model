@@ -80,7 +80,7 @@ view: product_exploration {
 
   measure: avg_category_profit {
     label: "Average Profit"
-
+    type:  average
   }
 
   measure: count {

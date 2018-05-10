@@ -8,7 +8,7 @@ include: "*.dashboard"
 
 datagroup: talals_first_project_default_datagroup {
   sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
+  max_cache_age: "4 hour"
 }
 
 persist_with: talals_first_project_default_datagroup

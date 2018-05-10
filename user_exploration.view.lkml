@@ -7,16 +7,6 @@ view: user_exploration {
     sql: ${TABLE}.id ;;
   }
 
-  dimension: max_num_orders {
-    type: number
-    sql: ${TABLE}.max_num_orders ;;
-  }
-
-  dimension: total_num_orders {
-    type: number
-    sql: ${TABLE}.total_num_orders ;;
-  }
-
 #   Customer Segmentation by Age
   dimension: age_group {
     type: tier
@@ -38,5 +28,14 @@ view: user_exploration {
     type: count
     drill_fields: [users.details*]
   }
+
+  # Not really indicative of anything, just testing
+  measure: minimum {
+    type: min
+    sql: ${users.age} ;;
+    drill_fields: [users.details*]
+
+  }
+
 
 }
