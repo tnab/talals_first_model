@@ -66,7 +66,7 @@ view: product_exploration {
     value_format_name: usd
   }
 
-  measure: test_proft {
+  measure: test_profit {
     type: sum
     sql: (${order_items.sale_price} - ${TABLE}.cost) ;;
     value_format_name: usd
@@ -74,7 +74,8 @@ view: product_exploration {
 
   measure: total_profit {
     type: sum
-    sql: ${TABLE}.profit ;;
+    sql: ${profit} ;;
+    value_format_name: usd
   }
 
   measure: avg_category_profit {

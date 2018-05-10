@@ -69,18 +69,19 @@ view: users {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
+    drill_fields: [details*]
   }
 
   # ----- Sets of fields for drilling ------
-  set: detail {
+  set: details {
     fields: [
       id,
       first_name,
       last_name,
       events.count,
       orders.count,
-      user_data.count
+      user_data.count,
+      zip
     ]
   }
 }

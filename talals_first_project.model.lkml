@@ -7,19 +7,11 @@ include: "*.view"
 include: "*.dashboard"
 
 datagroup: talals_first_project_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+  sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
 
 persist_with: talals_first_project_default_datagroup
-
-explore: events {
-  join: users {
-    type: left_outer
-    sql_on: ${events.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: product_exploration  {
   label: "Products"
@@ -34,6 +26,23 @@ explore: product_exploration  {
     relationship: one_to_many
   }
 }
+
+explore: user_exploration {
+  sql_always_where: ${users.age} > 0 AND ${users.age} < 100   ;;
+  label: "Users"
+  join: users {
+    sql_on: ${user_exploration.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+
+  join: user_data {
+    sql_on: ${user_data.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+
+}
+
+
 
 explore: order_items {
   join: inventory_items {
@@ -57,23 +66,6 @@ explore: order_items {
   join: users {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: orders {
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: user_exploration {
-  sql_always_where: ${users.age} > 0 AND ${users.age} < 100   ;;
-  label: "Users"
-  join: users {
-    sql_on: ${user_exploration.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
 }
