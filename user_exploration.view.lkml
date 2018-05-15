@@ -37,5 +37,4 @@ view: user_exploration {
 
   }
 
-
 }
