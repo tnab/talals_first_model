@@ -1,6 +1,32 @@
 view: orders {
   sql_table_name: demo_db.orders ;;
 
+#   dimension: foo {
+#     type: string
+#     sql:  "foo" ;;
+#   }
+#
+#   dimension: boo {
+#     type: string
+#     sql: {{orders.foo._value}} ;;
+#   }
+
+  parameter: foo  {
+    type: string
+    allowed_value: {
+      value: "cancelled"
+    }
+    allowed_value: {
+      value: "pending"
+    }
+    allowed_value: {
+      value: "complete"
+    }
+    allowed_value: {
+      value: "all"
+    }
+  }
+
   dimension: id {
     primary_key: yes
     type: number

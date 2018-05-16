@@ -28,7 +28,7 @@ explore: product_exploration  {
 }
 
 explore: user_exploration {
-  sql_always_where: ${users.age} > 0 AND ${users.age} < 100   ;;
+
   label: "Users"
   join: users {
     sql_on: ${user_exploration.user_id} = ${users.id} ;;
@@ -45,6 +45,16 @@ explore: user_exploration {
 
 
 explore: order_items {
+  sql_always_where:(
+  CASE
+    when {% parameter orders.foo %} = 'all' then 1=1
+    else ${orders.status} = {% parameter orders.foo %}
+    end
+     )
+    ;;
+#       when {% parameter orders.foo %} = 'all' then 1=1
+
+#   ${orders.status} = {% parameter orders.foo %}  ;;
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
