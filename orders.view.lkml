@@ -62,4 +62,9 @@ view: orders {
     type: count
     drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
   }
+
+  dimension: last_30_days {
+    type: yesno
+    sql: SELECT DATEDIFF(${created_date}, date) FROM ;;
+  }
 }

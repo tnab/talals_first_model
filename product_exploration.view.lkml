@@ -13,6 +13,11 @@ view: product_exploration {
     value_format_name: usd
   }
 
+  filter: foo {
+    type: number
+    description: "test"
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -81,6 +86,11 @@ view: product_exploration {
   measure: avg_category_profit {
     label: "Average Profit"
     type:  average
+  }
+
+  measure: testing {
+    type: number
+    sql: ${products.brand_count} / ${count} ;;
   }
 
   measure: count {

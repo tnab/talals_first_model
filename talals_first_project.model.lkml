@@ -15,6 +15,7 @@ persist_with: talals_first_project_default_datagroup
 
 explore: product_exploration  {
   label: "Products"
+
   join: products {
       type: left_outer
     sql_on: ${product_exploration.product_id} = ${products.id} ;;
@@ -45,13 +46,21 @@ explore: user_exploration {
 
 
 explore: order_items {
-  sql_always_where:(
-  CASE
-    when {% parameter orders.foo %} = 'all' then 1=1
-    else ${orders.status} = {% parameter orders.foo %}
-    end
-     )
-    ;;
+  sql_always_where:
+  ${orders.user_id} = {{_user_attributes['talal_test' ]| round: 0}};;
+# access_filter: {
+#   field: orders.user_id
+#   user_attribute: talal_test
+# }
+
+
+#   sql_always_where:(
+#   CASE
+#     when {% parameter orders.foo %} = 'all' then 1=1
+#     else ${orders.status} = {% parameter orders.foo %}
+#     end
+#      )
+#     ;;
 #       when {% parameter orders.foo %} = 'all' then 1=1
 
 #   ${orders.status} = {% parameter orders.foo %}  ;;
