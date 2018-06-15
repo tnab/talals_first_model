@@ -63,8 +63,11 @@ view: orders {
     drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
   }
 
-  dimension: last_30_days {
-    type: yesno
-    sql: SELECT DATEDIFF(${created_date}, date) FROM ;;
+# This takes a 30 day window and shifts it back to start the 30 day period from last ETL date as opposed to starting it from today
+  filter: shift_time_filter {
+    type: date
+    sql: {% condition %} DATE_ADD(CAST(${created_time} AS DATETIME),
+    INTERVAL DATEDIFF(CONVERT_TZ(NOW(), 'UTC', '{{ _query._query_timezone }}'),
+    (SELECT max(CAST(${created_time} AS DATETIME)) as max_date from ${TABLE})) DAY) {% endcondition %} ;;
   }
 }

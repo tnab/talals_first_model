@@ -43,16 +43,16 @@ explore: user_exploration {
 
 }
 
-
+explore: orders {}
+explore: check {}
 
 explore: order_items {
-  sql_always_where:
-  ${orders.user_id} = {{_user_attributes['talal_test' ]| round: 0}};;
+#   sql_always_where:
+#   ${orders.user_id} = {{_user_attributes['talal_test' ]| round: 0}};;
 # access_filter: {
 #   field: orders.user_id
 #   user_attribute: talal_test
 # }
-
 
 #   sql_always_where:(
 #   CASE
@@ -69,6 +69,11 @@ explore: order_items {
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
     relationship: many_to_one
   }
+
+#   join: check {
+#     sql_on: ${orders.created_date} = ${check.created_date} ;;
+#     relationship: many_to_many
+#   }
 
   join: orders {
     type: left_outer
