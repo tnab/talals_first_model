@@ -28,6 +28,8 @@ explore: product_exploration  {
   }
 }
 
+explore: inventory_items {}
+
 explore: user_exploration {
 
   label: "Users"

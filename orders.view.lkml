@@ -33,6 +33,11 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
+
+# measure: test_count_weekdays{
+#   type: number
+#   sql:  DATEDIFF(${created_date},   ;;
+# }
   dimension_group: created {
     type: time
     timeframes: [
@@ -46,6 +51,26 @@ view: orders {
     ]
     sql: ${TABLE}.created_at ;;
   }
+
+  parameter: timeframe_picker {
+    label: "Date Granularity"
+    type: string
+    allowed_value: { value: "Date" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    default_value: "Date"
+  }
+
+  dimension: dynamic_timeframe {
+    type: string
+    sql:
+    CASE
+    WHEN {% parameter timeframe_picker %} = 'Date' THEN ${created_date}
+    WHEN {% parameter timeframe_picker %} = 'Week' THEN ${created_week}
+    WHEN{% parameter timeframe_picker %} = 'Month' THEN ${created_month}
+    END ;;
+  }
+
 
   dimension: status {
     type: string
