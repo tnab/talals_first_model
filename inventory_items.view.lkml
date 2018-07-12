@@ -38,9 +38,6 @@ view: inventory_items {
       THEN 1 ELSE 0 END;;
   }
 
-
-
-
   dimension_group: created {
     type: time
     timeframes: [
@@ -48,13 +45,14 @@ view: inventory_items {
       time,
       date,
       week,
+      day_of_week,
+      day_of_week_index,
       month,
       quarter,
       year
     ]
     sql: ${TABLE}.created_at ;;
   }
-
 
   dimension: product_id {
     type: number
@@ -69,6 +67,8 @@ view: inventory_items {
       time,
       date,
       week,
+      day_of_week,
+      day_of_week_index,
       month,
       quarter,
       year

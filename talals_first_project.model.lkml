@@ -1,10 +1,7 @@
-connection: "thelook"
+  connection: "thelook"
 
 # include all the views
 include: "*.view"
-
-# include all the dashboards
-include: "*.dashboard"
 
 datagroup: talals_first_project_default_datagroup {
   sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -13,22 +10,24 @@ datagroup: talals_first_project_default_datagroup {
 
 persist_with: talals_first_project_default_datagroup
 
-explore: product_exploration  {
-  label: "Products"
-
-  join: products {
-      type: left_outer
-    sql_on: ${product_exploration.product_id} = ${products.id} ;;
-    relationship: many_to_one
-  }
-
-  join: order_items {
-    sql_on: ${product_exploration.id} = ${order_items.inventory_item_id} ;;
-    relationship: one_to_many
-  }
-}
+# explore: product_exploration  {
+#   label: "Products"
+#
+#   join: products {
+#       type: left_outer
+#     sql_on: ${product_exploration.product_id} = ${products.id} ;;
+#     relationship: many_to_one
+#   }
+#
+#   join: order_items {
+#     sql_on: ${product_exploration.id} = ${order_items.inventory_item_id} ;;
+#     relationship: one_to_many
+#   }
+# }
 
 explore: inventory_items {}
+
+explore: date_table {}
 
 explore: user_exploration {
 

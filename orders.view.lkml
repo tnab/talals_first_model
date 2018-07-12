@@ -67,7 +67,7 @@ view: orders {
     CASE
     WHEN {% parameter timeframe_picker %} = 'Date' THEN ${created_date}
     WHEN {% parameter timeframe_picker %} = 'Week' THEN ${created_week}
-    WHEN{% parameter timeframe_picker %} = 'Month' THEN ${created_month}
+    WHEN {% parameter timeframe_picker %} = 'Month' THEN ${created_month}
     END ;;
   }
 
