@@ -17,6 +17,25 @@ view: users {
     sql: ${TABLE}.city ;;
   }
 
+  dimension: failed_case_test {
+    type: string
+    case: {
+      when: {
+        sql:${TABLE}.city = "Agency"  ;;
+        label: "test_successful"
+      }
+      when: {
+        sql:${TABLE}.city = "Addis"  ;;
+        label: "test_successful"
+      }
+      when: {
+        sql:${TABLE}.city = "Akron"  ;;
+        label: "test_successful"
+      }
+      else: "nope"
+    }
+  }
+
   dimension: country {
     type: string
     map_layer_name: countries
