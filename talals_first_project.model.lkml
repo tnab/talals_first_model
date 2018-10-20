@@ -46,6 +46,7 @@ explore: user_exploration {
 
 explore: orders {}
 explore: check {}
+explore: user_age_quartile {}
 
 explore: order_items {
 #   sql_always_where:
